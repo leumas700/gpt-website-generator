@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P5.js Animation Showcase</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+</head>
+<body>
+    <script>
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+            noStroke();
+            frameRate(30);
+        }
+
+        function draw() {
+            background(0);
+
+            // Animation 1: Rotating Ellipses
+            fill(255, 150, 100, 150);
+            for (let i = 0; i < 10; i++) {
+                let angle = frameCount * 0.02 + i;
+                let x = width / 2 + cos(angle) * 200;
+                let y = height / 2 + sin(angle) * 200;
+                ellipse(x, y, 50, 50);
+            }
+
+            // Animation 2: Falling Squares
+            fill(100, 150, 255, 150);
+            for (let i = 0; i < 5; i++) {
+                let size = random(30, 60);
+                let x = random(width);
+                let y = (frameCount * 4 + i * 100) % height;
+                rect(x, y, size, size);
+            }
+
+            // Animation 3: Wave Pattern
+            fill(255, 255, 100, 100);
+            beginShape();
+            for (let x = 0; x < width; x += 10) {
+                let y = sin((x + frameCount) * 0.05) * 50 + height / 2;
+                vertex(x, y);
+            }
+            endShape();
+
+            // Animation 4: Expanding Circle Pulses
+            for (let i = 0; i < 5; i++) {
+                let size = sin(frameCount * 0.05 + i) * 50 + 100;
+                fill(150, 255, 150, 50);
+                ellipse(width / 2, height / 2, size, size);
+            }
+        }
+
+        function windowResized() {
+          resizeCanvas(windowWidth, windowHeight);
+        }
+    </script>
+</body>
+</html>
